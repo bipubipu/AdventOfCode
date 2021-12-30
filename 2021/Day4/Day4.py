@@ -13,7 +13,7 @@ def checkBingo(board, n, num_list):
             unmarked_list = [
                 int(item) for item in flat_list if not item in num_list
             ]
-            return [unmarked_list, int(num_list[-1])]
+            return sum(unmarked_list) * int(num_list[-1])
     return False
 
 
@@ -37,16 +37,13 @@ with open('boards.csv', 'r') as infile:
         num_list = nums[:i]
         for board in boards:
             status = checkBingo(board, size, num_list)
-        if status:
-            print(board)
-            print(status)
-            break
-        else:
-            # Check columns by using transposed board.
             tboard = list(zip(*board))
-            status = checkBingo(tboard, size, num_list)
+            tstatus = checkBingo(tboard, size, num_list)
             if status:
-                print(tboard)
                 print(status)
                 break
-            
+            if tstatus:
+                print(tstatus)
+                break
+        if status or tstatus:
+            break
