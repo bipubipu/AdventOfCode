@@ -19,19 +19,23 @@ def countPoints(x, y, dict):
         dict[(x, y)] = 1
 
 
-with open('vents.csv', 'r') as infile:
-    lines = [line.strip().split('->') for line in infile.readlines()]
-    # Innitialise a dictionary to store coords
-    coords = {}
+def openFile(filename):
+    with open(filename, 'r') as infile:
+        lines = [line.strip().split('->') for line in infile.readlines()]
+    return lines
 
-    # Line will be in this form: ['0,9 ', ' 5,9']
-    for line in lines:
-        # Set coords of starting and ending point of the line
-        (x1, y1) = tuple(map(int, line[0].split(',')))
-        (x2, y2) = tuple(map(int, line[1].split(',')))
+lines = openFile('vents.csv')
+# Initialise a dictionary to store coords
+coords = {}
 
-        # If a line is vertical or horizontal
-        if x1 == x2 or y1 == y2:
-            getPoints(x1, y1, x2, y2, coords)
+# Line will be in this form: ['0,9 ', ' 5,9']
+for line in lines:
+    # Set coords of starting and ending point of the line
+    (x1, y1) = tuple(map(int, line[0].split(',')))
+    (x2, y2) = tuple(map(int, line[1].split(',')))
 
-    print(sum(v >= 2 for v in coords.values()))
+    # If a line is vertical or horizontal
+    if x1 == x2 or y1 == y2:
+        getPoints(x1, y1, x2, y2, coords)
+
+print(sum(v >= 2 for v in coords.values()))
