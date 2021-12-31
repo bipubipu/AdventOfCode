@@ -1,18 +1,15 @@
 def getPoints(x1, y1, x2, y2, dict):
     if x1 == x2:
-        if y1 < y2:
-            for i in range(y1, y2 + 1):
-                countPoints(x1, i, dict)
-        else:
-            for i in range(y2, y1 + 1):
-                countPoints(x1, i, dict)
+        ymin = y1 if y1 < y2 else y2
+        ymax = y2 if y1 < y2 else y1
+        for i in range(ymin, ymax + 1):
+            countPoints(x1, i, dict)
+
     if y1 == y2:
-        if x1 < x2:
-            for i in range(x1, x2 + 1):
-                countPoints(i, y1, dict)
-        else:
-            for i in range(x2, x1 + 1):
-                countPoints(i, y1, dict)
+        xmin = x1 if x1 < x2 else x2
+        xmax = x2 if x1 < x2 else x1
+        for i in range(xmin, xmax + 1):
+            countPoints(i, y1, dict)
 
 
 def countPoints(x, y, dict):
