@@ -1,4 +1,6 @@
-with open('Day1.csv', 'r') as infile:
+import sys
+
+with open(sys.argv[1], 'r') as infile:
     count = 0
     lines = infile.readlines()
     length = len(lines)

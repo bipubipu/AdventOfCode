@@ -1,8 +1,11 @@
+import sys
+
+
 def get_number(string):
     return int(''.join(filter(str.isdigit, string)))
 
 
-with open('Day2.csv', 'r') as infile:
+with open(sys.argv[1], 'r') as infile:
     horizon = 0
     depth = 0
     aim = 0

@@ -1,8 +1,11 @@
+import sys
+
+
 def binary_list2int(binary_list):
     return int(''.join(binary_list), 2)
 
 
-with open('Day3.csv', 'r') as infile:
+with open(sys.argv[1], 'r') as infile:
     lines = infile.readlines()
     length_lines = len(lines)
     length_number = len(lines[0].strip())

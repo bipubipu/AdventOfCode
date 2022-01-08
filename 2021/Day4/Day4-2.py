@@ -1,3 +1,6 @@
+import sys
+
+
 # Check if list/tuple A is contained in list B, return True or False
 def compare_lists(A, B):
     return all(item in B for item in A)
@@ -26,30 +29,31 @@ def check_board_is_bingo(board, size, drawn_nums):
     return False
 
 
-with open('nums.csv', 'r') as f:
+with open(sys.argv[1], 'r') as f:
     nums = f.read().split(',')
 
-with open('boards.csv', 'r') as infile:
+with open(sys.argv[2], 'r') as infile:
     lines = [line.split() for line in infile.readlines() if line.strip()]
-    # Get the size of bingo boards, which is the starting point of iteration
-    size = len(lines[0])
-    # Get the number of bingo boards.
-    num_boards = len(lines) // size
 
-    # Create bingo boards.
-    boards = []
-    for i in range(num_boards):
-        boards.append(lines[i * size:i * size + size])
+# Get the size of bingo boards, which is the starting point of iteration
+size = len(lines[0])
+# Get the number of bingo boards.
+num_boards = len(lines) // size
 
-    # Iterate the list of drawn numbers and check if each board bingoes.
-    # Start from the size of bingo boards, increment one each time.
-    scores = []
-    for i in range(size, len(nums) + 1):
-        drawn_nums = nums[:i]
-        for board in boards:
-            status = check_board_is_bingo(board, size, drawn_nums)
-            if status:
-                # Remove the board if it bingoes, store scores in a list, the last one is what we are after
-                boards.remove(board)
-                scores.append(status)
-    print(scores[-1])
+# Create bingo boards.
+boards = []
+for i in range(num_boards):
+    boards.append(lines[i * size:i * size + size])
+
+# Iterate the list of drawn numbers and check if each board bingoes.
+# Start from the size of bingo boards, increment one each time.
+scores = []
+for i in range(size, len(nums) + 1):
+    drawn_nums = nums[:i]
+    for board in boards:
+        status = check_board_is_bingo(board, size, drawn_nums)
+        if status:
+            # Remove the board if it bingoes, store scores in a list, the last one is what we are after
+            boards.remove(board)
+            scores.append(status)
+print(scores[-1])
