@@ -2,7 +2,7 @@ import sys
 
 with open(sys.argv[1], 'r') as f:
     list = f.read().split(',')
-    list = list(map(int, list))
+    list = [int(i) for i in list]
 
 num_of_days = int(sys.argv[2])
 for i in range(num_of_days):
