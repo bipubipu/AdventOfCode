@@ -7,3 +7,4 @@ A repo of my solutions to Advent Of Code https://adventofcode.com
 ### 3. Open your terminal, change directory to each day's folder, type command such as
 `python3 day1.py 'day1.csv'`
 <br>Change the script name and data source name accordinly.
+You can add an alias of python3 in your zprofile or profile depends on your shell environment if you use Mac/Linux.
